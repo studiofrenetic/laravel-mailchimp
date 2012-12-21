@@ -14,8 +14,7 @@ class Mailchimp
 	public static function __callStatic($method, $args)
 	{
 		// load api key
-		$api_key = Config::get('mailchimp.api_key');
-		
+		$api_key = Config::get('mailchimp::mailchimp.api_key');
 		// determine endpoint
 		list($ignore, $server) = explode('-', $api_key);
 		$endpoint = 'https://'.$server.'.api.mailchimp.com/1.3/?method='.self::camelcase($method);
@@ -33,6 +32,8 @@ class Mailchimp
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+		// var_dump($ch);
+		// exit();
 		$response = curl_exec($ch);
 
 		// catch errors
@@ -42,7 +43,7 @@ class Mailchimp
 			curl_close($ch);
 			
 			// return false
-			return false;
+			return array('error', $response);
 		}
 		else
 		{
