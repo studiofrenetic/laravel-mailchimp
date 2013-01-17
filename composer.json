@@ -1,0 +1,14 @@
+{
+    "name": "frenesie/bundles/mailchimp",
+    "description": "Mailchimp Bundle",
+    "authors": [
+        {
+            "name": "Martin Bastien",
+            "email": "martin.bastien@studiofrenetic.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "minimum-stability": "dev"
+}
