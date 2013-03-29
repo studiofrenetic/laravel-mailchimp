@@ -17,11 +17,13 @@ class Mailchimp
 		$api_key = Config::get('mailchimp::mailchimp.api_key');
 		// determine endpoint
 		list($ignore, $server) = explode('-', $api_key);
-		$endpoint = 'https://'.$server.'.api.mailchimp.com/1.3/?method='.self::camelcase($method);
+		$endpoint = 'http://'.$server.'.api.mailchimp.com/1.3/?method='.self::camelcase($method);
 		
 		// build payload
 		$arguments = isset($args[0]) ? $args[0] : array();
 		$payload = urlencode(json_encode(array('apikey'=>$api_key) + $arguments));
+
+		// echo $payload;
 		
 		// setup curl request
 		$ch = curl_init();
@@ -39,11 +41,11 @@ class Mailchimp
 		// catch errors
 		if (curl_errno($ch))
 		{
-			#$errors = curl_error($ch);
+			$errors = curl_error($ch);
 			curl_close($ch);
 			
-			// return false
-			return array('error', $response);
+			return false;
+			// return array('error', $errors);
 		}
 		else
 		{
