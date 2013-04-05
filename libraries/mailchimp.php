@@ -34,7 +34,7 @@ class Mailchimp
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-		// var_dump($ch);
+		// var_dump($arguments);
 		// exit();
 		$response = curl_exec($ch);
 
